@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Monilisiima Lodge</title>
+<meta name="description" content="Manicure, pedicure, cejas y depilación facial. Agenda tu evaluación de manicure por $2.990.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap">
+<style>
+  :root {
+    --bg: #FBF8F3;
+    --surface: #FFFFFF;
+    --ink: #3B3128;
+    --muted: #857667;
+    --line: #EAE1D5;
+    --nude: #F3EADF;
+    --lacquer: #8C6E4F;
+    --lacquer-ink: #FFFFFF;
+    --focus: #8C6E4F;
+    --ok: #6F7F5A;
+    --shadow: rgba(90, 70, 45, .28);
+    --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+    --body: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
+    --step--1: 0.8125rem;
+    --step-0: 1rem;
+    --step-1: 1.25rem;
+    --step-2: 1.75rem;
+    --step-3: clamp(2.25rem, 5vw, 3.5rem);
+    --step-4: clamp(2.75rem, 7vw, 5rem);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #1C1814;
+      --surface: #25201B;
+      --ink: #F3ECE3;
+      --muted: #B3A594;
+      --line: #3A332B;
+      --nude: #3A3128;
+      --lacquer: #D8BF9E;
+      --lacquer-ink: #1C1814;
+      --focus: #D8BF9E;
+      --ok: #B7C79A;
+      --shadow: rgba(0, 0, 0, .5);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #1C1814;
+    --surface: #25201B;
+    --ink: #F3ECE3;
+    --muted: #B3A594;
+    --line: #3A332B;
+    --nude: #3A3128;
+    --lacquer: #D8BF9E;
+    --lacquer-ink: #1C1814;
+    --focus: #D8BF9E;
+    --ok: #B7C79A;
+    --shadow: rgba(0, 0, 0, .5);
+  }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  img { max-width: 100%; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-weight: 300;
+    font-size: var(--step-0);
+    line-height: 1.65;
+    margin: 0;
+    padding-inline: 20px;
+  }
+  .wrap { max-width: 1120px; margin-inline: auto; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.08; text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  a { color: inherit; }
+  .eyebrow {
+    font-size: var(--step--1);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: var(--muted);
+  }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+  /* Header */
+  header.top {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    margin-inline: -20px;
+    padding-inline: 20px;
+  }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; }
+  .brand { font-family: var(--display); font-size: var(--step-1); text-decoration: none; letter-spacing: 0.01em; }
+  .brand em { font-style: italic; color: var(--lacquer); }
+  .top nav { display: flex; align-items: center; gap: 28px; font-size: 0.9375rem; }
+  .top nav a:not(.btn) { text-decoration: none; color: var(--muted); }
+  .top nav a:not(.btn):hover { color: var(--ink); }
+  @media (max-width: 720px) { .top nav a:not(.btn) { display: none; } }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    font: 400 0.9375rem/1 var(--body);
+    letter-spacing: 0.04em;
+    padding: 14px 22px;
+    border-radius: 999px;
+    border: 1px solid var(--lacquer);
+    background: var(--lacquer);
+    color: var(--lacquer-ink);
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  .btn:hover { opacity: .9; transform: translateY(-1px); }
+  .btn.ghost { background: transparent; color: var(--lacquer); }
+  .btn.small { padding: 10px 18px; font-size: 0.875rem; }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(32px, 6vw, 88px); padding-block: clamp(48px, 8vw, 96px) clamp(56px, 8vw, 104px); align-items: start; }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+  .hero-copy { display: flex; flex-direction: column; gap: 28px; }
+  .hero h1 { font-size: var(--step-4); letter-spacing: -0.01em; }
+  .hero h1 em { color: var(--lacquer); }
+  .hero .lede { font-size: 1.125rem; color: var(--muted); max-width: 46ch; }
+  .facts { display: flex; flex-wrap: wrap; gap: 12px 36px; font-size: 0.9375rem; }
+  .facts div { display: flex; flex-direction: column; }
+  .facts strong { font-family: var(--display); font-weight: 400; font-size: var(--step-2); line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .facts span { color: var(--muted); font-size: var(--step--1); letter-spacing: .06em; text-transform: uppercase; }
+
+  /* Swatch rack: nail-shaped tones */
+  .rack { display: flex; gap: 14px; align-items: flex-end; padding-top: 8px; }
+  .tip {
+    width: 34px; border-radius: 17px 17px 8px 8px;
+    background: var(--c);
+    border: 1px solid var(--line);
+    box-shadow: inset 0 -10px 0 rgba(255,255,255,.22), inset 6px 0 10px rgba(255,255,255,.3);
+    transform-origin: bottom;
+    animation: rise .9s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .tip:nth-child(1) { height: 58px; animation-delay: .05s; }
+  .tip:nth-child(2) { height: 74px; animation-delay: .12s; }
+  .tip:nth-child(3) { height: 82px; animation-delay: .19s; }
+  .tip:nth-child(4) { height: 70px; animation-delay: .26s; }
+  .tip:nth-child(5) { height: 48px; animation-delay: .33s; }
+  @keyframes rise { from { transform: scaleY(.6); } to { transform: scaleY(1); } }
+  .rack-caption { font-size: var(--step--1); color: var(--muted); letter-spacing: .04em; }
+
+  /* Form card */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: clamp(24px, 4vw, 36px);
+    display: flex; flex-direction: column; gap: 20px;
+    box-shadow: 0 30px 60px -40px var(--shadow);
+  }
+  .card h2 { font-size: var(--step-2); }
+  .card .sub { color: var(--muted); font-size: 0.9375rem; }
+  .price-tag { display: inline-flex; align-items: baseline; gap: 8px; padding: 6px 14px; border-radius: 999px; background: var(--nude); font-size: 0.875rem; align-self: flex-start; }
+  .price-tag b { font-family: var(--display); font-weight: 500; font-size: 1.125rem; font-variant-numeric: tabular-nums; }
+  #form-view { display: flex; flex-direction: column; gap: 20px; }
+  form { display: flex; flex-direction: column; gap: 18px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 460px) { .row2 { grid-template-columns: 1fr; } }
+  label, legend { font-size: var(--step--1); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+  input[type="text"], input[type="tel"], select {
+    font: 300 1rem var(--body);
+    color: var(--ink);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 8px 0 10px;
+    border-radius: 0;
+    width: 100%;
+  }
+  input:focus, select:focus { outline: none; border-bottom-color: var(--lacquer); }
+  select option { background: var(--surface); color: var(--ink); }
+  fieldset { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { position: relative; }
+  .chip input { position: absolute; opacity: 0; pointer-events: none; }
+  .chip span {
+    display: inline-block; padding: 7px 14px; border-radius: 999px;
+    border: 1px solid var(--line); font-size: 0.875rem; cursor: pointer;
+    text-transform: none; letter-spacing: 0; color: var(--ink);
+    transition: background .15s, border-color .15s, color .15s;
+  }
+  .chip input:checked + span { background: var(--nude); border-color: var(--lacquer); }
+  .chip input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .error { color: var(--lacquer); font-size: 0.875rem; min-height: 1.2em; }
+  .fine { font-size: var(--step--1); color: var(--muted); }
+  .done { display: flex; flex-direction: column; gap: 14px; padding-block: 12px; }
+  .done .mark { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--ok); color: var(--ok); display: grid; place-items: center; font-size: 1.25rem; }
+
+  /* Sections */
+  section.block { padding-block: clamp(56px, 8vw, 96px); border-top: 1px solid var(--line); }
+  .head { display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px 64px; margin-bottom: 48px; align-items: end; }
+  @media (max-width: 800px) { .head { grid-template-columns: 1fr; } }
+  .head h2 { font-size: var(--step-3); }
+  .head p { color: var(--muted); max-width: 52ch; }
+
+  .checks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 32px; border-top: 1px solid var(--line); }
+  @media (max-width: 800px) { .checks { grid-template-columns: 1fr; } }
+  .check { padding-block: 28px; display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid var(--line); }
+  .check h3 { font-size: var(--step-1); }
+  .check p { color: var(--muted); font-size: 0.9375rem; }
+  .check .term { font-size: var(--step--1); letter-spacing: .12em; text-transform: uppercase; color: var(--lacquer); }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  @media (max-width: 800px) { .steps { grid-template-columns: 1fr; gap: 28px; } }
+  .step { display: flex; flex-direction: column; gap: 10px; }
+  .step .n { font-family: var(--display); font-style: italic; font-size: var(--step-3); color: var(--lacquer); line-height: 1; }
+  .step h3 { font-size: var(--step-1); }
+  .step p { color: var(--muted); font-size: 0.9375rem; max-width: 36ch; }
+
+  .menu { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 64px; }
+  @media (max-width: 800px) { .menu { grid-template-columns: 1fr; } }
+  .menu h3 { font-size: var(--step-2); font-style: italic; padding-bottom: 12px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .menu h3 .tag { font-family: var(--body); font-style: normal; font-size: var(--step--1); letter-spacing: .1em; text-transform: uppercase; color: var(--lacquer); white-space: nowrap; }
+  .menu ul { list-style: none; margin: 0 0 32px; padding: 0; border-top: 1px solid var(--line); }
+  .menu li { display: flex; flex-direction: column; gap: 2px; padding-block: 16px; border-bottom: 1px solid var(--line); }
+  .menu li b { font-weight: 400; }
+  .menu li small { color: var(--muted); font-size: 0.875rem; }
+
+  .faq { max-width: 760px; }
+  details { border-bottom: 1px solid var(--line); padding-block: 18px; }
+  details:first-of-type { border-top: 1px solid var(--line); }
+  summary { cursor: pointer; font-family: var(--display); font-size: var(--step-1); list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; font-family: var(--body); font-weight: 300; color: var(--lacquer); transition: transform .2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { color: var(--muted); padding-top: 10px; max-width: 62ch; }
+
+  .closing { display: grid; grid-template-columns: 1.4fr auto; gap: 24px 48px; align-items: end; }
+  @media (max-width: 800px) { .closing { grid-template-columns: 1fr; } }
+  .closing h2 { font-size: var(--step-4); }
+  .closing h2 em { color: var(--lacquer); }
+
+  footer { border-top: 1px solid var(--line); padding-block: 32px 40px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 40px; font-size: 0.875rem; color: var(--muted); }
+  footer .brand { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio">Monilisiima <em>Lodge</em></a>
+    <nav aria-label="Principal">
+      <a href="#evaluacion">La evaluación</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#preguntas">Preguntas</a>
+      <a class="btn small" href="#agendar">Agendar evaluación</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="inicio">
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Manicure · Pedicure · Cejas · Depilación facial</p>
+      <h1>Antes del color, <em>conocemos</em> tus manos.</h1>
+      <p class="lede">Tu manicure en Monilisiima Lodge empieza con una evaluación personal de uñas y cutículas. En 15 minutos definimos la técnica, la forma y el esmaltado que mejor le sientan a tus uñas.</p>
+      <div class="facts">
+        <div><strong>15 min</strong><span>Duración</span></div>
+        <div><strong>$2.990</strong><span>Valor</span></div>
+        <div><strong>Manicure</strong><span>Servicio evaluado</span></div>
+      </div>
+      <div>
+        <div class="rack" aria-hidden="true">
+          <div class="tip" style="--c:#F6EFE6"></div>
+          <div class="tip" style="--c:#E8D9C5"></div>
+          <div class="tip" style="--c:#D6BF9F"></div>
+          <div class="tip" style="--c:#B89A76"></div>
+          <div class="tip" style="--c:#FFFFFF"></div>
+        </div>
+        <p class="rack-caption">Marfil · Arena · Almendra · Camel · Blanco</p>
+      </div>
+    </div>
+
+    <aside class="card" id="agendar" aria-labelledby="form-title">
+      <div id="form-view">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span class="price-tag"><b>$2.990</b> · 15 minutos</span>
+          <h2 id="form-title">Agenda tu evaluación de manicure</h2>
+          <p class="sub">Déjanos tus datos y te escribimos para confirmar día y hora.</p>
+        </div>
+        <form id="eval-form" novalidate>
+          <div class="field">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" autocomplete="given-name" placeholder="Ej. Valentina" required>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="telefono">WhatsApp</label>
+              <input id="telefono" name="telefono" type="tel" autocomplete="tel" placeholder="+56 9 1234 5678" required>
+            </div>
+            <div class="field">
+              <label for="horario">Prefiero</label>
+              <select id="horario" name="horario">
+                <option>Mañana</option>
+                <option>Tarde</option>
+                <option>Después del trabajo</option>
+                <option>Sábado</option>
+              </select>
+            </div>
+          </div>
+          <fieldset>
+            <legend>¿Qué te gustaría mejorar?</legend>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" id="c-quebradizas" name="interes" value="Uñas quebradizas"><span>Uñas quebradizas</span></label>
+              <label class="chip"><input type="checkbox" id="c-cuticulas" name="interes" value="Cutículas secas"><span>Cutículas secas</span></label>
+              <label class="chip"><input type="checkbox" id="c-forma" name="interes" value="Forma y largo"><span>Forma y largo</span></label>
+              <label class="chip"><input type="checkbox" id="c-duracion" name="interes" value="Duración del esmalte"><span>Duración del esmalte</span></label>
+            </div>
+          </fieldset>
+          <p class="error" id="form-error" role="alert"></p>
+          <button class="btn" type="submit">Solicitar evaluación · $2.990</button>
+          <p class="fine">La evaluación aplica solo a servicios de manicure. Usamos tu número únicamente para coordinar la cita.</p>
+        </form>
+      </div>
+      <div class="done" id="done-view" hidden>
+        <div class="mark" aria-hidden="true">✓</div>
+        <h2>Solicitud recibida</h2>
+        <p class="sub" id="done-text"></p>
+        <button class="btn ghost small" type="button" id="reset">Hacer otra solicitud</button>
+      </div>
+    </aside>
+  </section>
+
+  <section class="block" id="evaluacion">
+    <div class="head">
+      <h2>Qué revisamos en tu evaluación</h2>
+      <p>Una profesional observa tus manos con buena luz y sin esmalte. Al terminar te recomendamos el servicio de manicure y la frecuencia más adecuados para tus uñas.</p>
+    </div>
+    <div class="checks">
+      <div class="check">
+        <span class="term">Lámina ungueal</span>
+        <h3>Grosor y fortaleza</h3>
+        <p>Detectamos capas que se separan, estrías y zonas debilitadas por esmaltados anteriores.</p>
+      </div>
+      <div class="check">
+        <span class="term">Cutícula y eponiquio</span>
+        <h3>Hidratación</h3>
+        <p>Vemos si la cutícula está seca, cortada o inflamada, y cómo tratarla sin lastimarla.</p>
+      </div>
+      <div class="check">
+        <span class="term">Borde libre</span>
+        <h3>Forma ideal</h3>
+        <p>Según el ancho de tu lecho ungueal sugerimos almendra, cuadrada suave u ovalada.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="head">
+      <h2>Cómo funciona</h2>
+      <p>Tres pasos simples. Si decides atenderte ese mismo día, pasamos directo a tu manicure.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="n">1</span>
+        <h3>Solicitas tu hora</h3>
+        <p>Completas el formulario y te confirmamos por WhatsApp en horario de atención.</p>
+      </div>
+      <div class="step">
+        <span class="n">2</span>
+        <h3>Te evaluamos</h3>
+        <p>15 minutos de revisión de tus manos, con uñas limpias y sin esmalte.</p>
+      </div>
+      <div class="step">
+        <span class="n">3</span>
+        <h3>Recibes tu recomendación</h3>
+        <p>Técnica, forma y frecuencia para tu manicure. Tú decides si agendas y cuándo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="servicios">
+    <div class="head">
+      <h2>Servicios</h2>
+      <p>Además de manicure, en el salón te atendemos con pedicure, cejas y pestañas coreanas y depilación facial.</p>
+    </div>
+    <div class="menu">
+      <div>
+        <h3>Manicure <span class="tag">Con evaluación</span></h3>
+        <ul>
+          <li><b>Manicure clásica</b><small>Limado, cutícula, hidratación y esmalte tradicional</small></li>
+          <li><b>Esmaltado semipermanente</b><small>Base niveladora y curado en lámpara LED</small></li>
+          <li><b>Nivelación con rubber base</b><small>Refuerzo para uñas finas o quebradizas</small></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Pedicure</h3>
+        <ul>
+          <li><b>Pedicure clásica</b><small>Corte, limado, cutícula y esmalte tradicional</small></li>
+          <li><b>Pedicure spa</b><small>Baño de pies, remoción de durezas y masaje</small></li>
+          <li><b>Semipermanente en pies</b><small>Color y brillo de larga duración</small></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Cejas y pestañas</h3>
+        <ul>
+          <li><b>Lifting coreano</b><small>Curvatura natural y duradera, sin extensiones</small></li>
+          <li><b>Laminado de cejas coreano</b><small>Cejas peinadas, definidas y con efecto más poblado</small></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Depilación facial</h3>
+        <ul>
+          <li><b>Depilación con hilo</b><small>Precisión para cejas, bozo y rostro</small></li>
+          <li><b>Depilación con cera</b><small>Rostro completo o zonas específicas</small></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="preguntas">
+    <div class="head">
+      <h2>Preguntas frecuentes</h2>
+      <p>Si tienes otra duda, puedes consultarla cuando te contactemos.</p>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>¿Cuánto cuesta y cuánto dura la evaluación?</summary>
+        <p>La evaluación tiene un valor de $2.990 y dura 15 minutos.</p>
+      </details>
+      <details>
+        <summary>¿La evaluación sirve para pedicure u otros servicios?</summary>
+        <p>No. La evaluación aplica solo a manicure. Pedicure, lifting, laminado de cejas y depilación facial se agendan directamente.</p>
+      </details>
+      <details>
+        <summary>¿Debo llegar sin esmalte?</summary>
+        <p>Idealmente sí. Si llevas semipermanente, avísanos al confirmar la hora para considerar el retiro.</p>
+      </details>
+      <details>
+        <summary>¿Puedo hacerme la manicure el mismo día?</summary>
+        <p>Sí, si hay disponibilidad. Avísanos al confirmar la hora y reservamos el tiempo extra.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="closing">
+      <h2>Tus uñas, <em>con un plan.</em></h2>
+      <a class="btn" href="#agendar">Agendar evaluación · $2.990</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="brand">Monilisiima <em>Lodge</em></span>
+    <span>Manicure · Pedicure · Lifting y laminado coreano · Depilación con hilo y cera</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var form = document.getElementById('eval-form');
+    var formView = document.getElementById('form-view');
+    var doneView = document.getElementById('done-view');
+    var err = document.getElementById('form-error');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nombre = form.nombre.value.trim();
+      var tel = form.telefono.value.trim();
+      var digits = tel.replace(/\D/g, '');
+      if (!nombre) { err.textContent = 'Escribe tu nombre para saber cómo llamarte.'; form.nombre.focus(); return; }
+      if (digits.length < 8) { err.textContent = 'Revisa tu número de WhatsApp: debe tener al menos 8 dígitos.'; form.telefono.focus(); return; }
+      err.textContent = '';
+      var intereses = Array.prototype.slice.call(form.querySelectorAll('input[name="interes"]:checked')).map(function (i) { return i.value.toLowerCase(); });
+      var detalle = intereses.length ? ' Revisaremos especialmente: ' + intereses.join(', ') + '.' : '';
+      document.getElementById('done-text').textContent =
+        'Gracias, ' + nombre + '. Te escribiremos al ' + tel + ' para confirmar tu evaluación de manicure (15 min, $2.990) en horario de ' +
+        form.horario.value.toLowerCase() + '.' + detalle;
+      formView.hidden = true;
+      doneView.hidden = false;
+      doneView.scrollIntoView({ block: 'nearest' });
+    });
+
+    document.getElementById('reset').addEventListener('click', function () {
+      form.reset();
+      doneView.hidden = true;
+      formView.hidden = false;
+      form.nombre.focus();
+    });
+  })();
+</script>
+</body>
+</html>
